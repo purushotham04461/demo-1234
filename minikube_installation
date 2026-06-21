@@ -26,3 +26,5 @@ minikube dashboard
 minikube addons enable metrics-server
 kubectl proxy --address='0.0.0.0' --disable-filter=true
 history
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
