@@ -1,0 +1,28 @@
+# install docker 
+sudo su
+sudo dnf update -y
+sudo dnf install -y docker
+sudo systemctl enable --now docker
+sudo usermod -aG docker ec2-user
+newgrp docker
+docker ps
+
+#install kubernetes
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+kubectl version --client
+
+#install minikube
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+chmod +x minikube-linux-amd64
+sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+minikube version
+minikube start --driver=docker
+kubectl get nodes
+
+#connect to dashboard
+minikube dashboard
+minikube addons enable metrics-server
+kubectl proxy --address='0.0.0.0' --disable-filter=true
+history
